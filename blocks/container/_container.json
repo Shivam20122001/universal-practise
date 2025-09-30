@@ -44,11 +44,5 @@
 
   ],
   "filters": [
-    {
-      "id": "section",
-      "components": [
-        "container"
-      ]
-    }
   ]
 }
