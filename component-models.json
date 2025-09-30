@@ -199,24 +199,17 @@
     ]
   },
   {
-    "component": "container",
-    "name": "test",
-    "label": "Multi Text",
-    "multi": true,
+    "id": "aem-content-picker",
     "fields": [
       {
-        "component": "reference",
-        "name": "image",
+        "component": "aem-content",
+        "name": "reference",
         "value": "",
-        "label": "Sample Image",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "alt",
-        "value": "",
-        "label": "Alt Text",
-        "valueType": "string"
+        "label": "AEM Content Picker",
+        "valueType": "string",
+        "validation": {
+          "rootPath": "/content"
+        }
       }
     ]
   },
