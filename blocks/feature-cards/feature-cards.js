@@ -1,67 +1,126 @@
-export default function decorate(block) {
+/**
+ * Feature Cards Block for AEM Edge Delivery Services (Franklin)
+ * -------------------------------------------------------------
+ * Renders cards based on AEM-authored data or fallback template data.
+ * Automatically displays placeholder cards if no authored data exists.
+ */
 
-  const json = block.dataset.json ? JSON.parse(block.dataset.json) : window.featureCardsData;
+// Import utilities from Franklin runtime (optional but good practice)
+import { createOptimizedPicture } from '../../scripts/aem.js'; // used if you want optimized images (optional)
 
-  if (!json || !json.cards || json.cards.length === 0) {
-    block.innerHTML = '<p>No feature cards available.</p>';
-    return;
+/**
+ * Decorate function (mandatory Franklin block entrypoint)
+ * @param {HTMLElement} block - The block element on the page
+ */
+export default async function decorate(block) {
+  // 1️⃣ Try to get authored JSON data first (if provided by AEM)
+  let data;
+
+  try {
+    const jsonAttr = block.dataset.json;
+    if (jsonAttr) {
+      data = JSON.parse(jsonAttr);
+    }
+  } catch (e) {
+    console.warn('⚠️ Failed to parse authored Feature Cards data:', e);
   }
 
-  // Create container for cards
-  const cardsContainer = document.createElement('div');
-  cardsContainer.classList.add('feature-cards-container');
+  // 2️⃣ Fallback: use template placeholder data
+  if (!data || !data.cards || data.cards.length === 0) {
+    data = {
+      name: 'Feature Cards',
+      model: 'feature-cards',
+      cards: [
+        {
+          cardImage: 'https://placehold.co/600x400?text=Card+1',
+          cardTitle: 'Smart Analytics',
+          cardDescription:
+            '<p>Gain powerful insights with AI-driven reports and dashboards to make data-driven decisions.</p>',
+          cardCtaLabel: 'Learn More',
+          cardCta: '/features/analytics',
+        },
+        {
+          cardImage: 'https://placehold.co/600x400?text=Card+2',
+          cardTitle: 'Automation Tools',
+          cardDescription:
+            '<p>Automate repetitive tasks to boost productivity and reduce manual work.</p>',
+          cardCtaLabel: 'Explore',
+          cardCta: '/features/automation',
+        },
+        {
+          cardImage: 'https://placehold.co/600x400?text=Card+3',
+          cardTitle: 'Advanced Security',
+          cardDescription:
+            '<p>Protect your data with enterprise-grade security and compliance features.</p>',
+          cardCtaLabel: 'Read More',
+          cardCta: '/features/security',
+        },
+      ],
+    };
+  }
 
-  json.cards.forEach((card) => {
-    // Create card wrapper
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('feature-card');
+  // 3️⃣ Create the feature cards container
+  const container = document.createElement('div');
+  container.classList.add('feature-cards-container');
 
-    // Card image
+  // 4️⃣ Loop through cards and build HTML
+  data.cards.forEach((card) => {
+    const cardEl = document.createElement('div');
+    cardEl.classList.add('feature-card');
+
+    // ---- Image ----
     if (card.cardImage) {
-      const imgWrapper = document.createElement('div');
-      imgWrapper.classList.add('feature-card-image');
-      const img = document.createElement('img');
-      img.src = card.cardImage;
-      img.alt = card.cardTitle || 'Feature Image';
-      imgWrapper.appendChild(img);
-      cardDiv.appendChild(imgWrapper);
+      const imgWrap = document.createElement('div');
+      imgWrap.classList.add('feature-card-image');
+
+      // optional: use Franklin's optimized picture
+      const picture = createOptimizedPicture
+        ? createOptimizedPicture(card.cardImage, card.cardTitle || 'Feature Image')
+        : null;
+
+      if (picture) {
+        imgWrap.appendChild(picture);
+      } else {
+        const img = document.createElement('img');
+        img.src = card.cardImage;
+        img.alt = card.cardTitle || 'Feature Image';
+        imgWrap.appendChild(img);
+      }
+
+      cardEl.appendChild(imgWrap);
     }
 
-    // Card content
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('feature-card-content');
+    // ---- Content ----
+    const content = document.createElement('div');
+    content.classList.add('feature-card-content');
 
-    // Title
     if (card.cardTitle) {
-      const titleEl = document.createElement('h3');
-      titleEl.classList.add('feature-card-title');
-      titleEl.textContent = card.cardTitle;
-      contentDiv.appendChild(titleEl);
+      const title = document.createElement('h3');
+      title.classList.add('feature-card-title');
+      title.textContent = card.cardTitle;
+      content.appendChild(title);
     }
 
-    // Description
     if (card.cardDescription) {
-      const descEl = document.createElement('div');
-      descEl.classList.add('feature-card-description');
-      descEl.innerHTML = card.cardDescription;
-      contentDiv.appendChild(descEl);
+      const desc = document.createElement('div');
+      desc.classList.add('feature-card-description');
+      desc.innerHTML = card.cardDescription;
+      content.appendChild(desc);
     }
 
-    // CTA
     if (card.cardCta && card.cardCtaLabel) {
-      const ctaEl = document.createElement('a');
-      ctaEl.classList.add('feature-card-cta');
-      ctaEl.href = card.cardCta;
-      ctaEl.textContent = card.cardCtaLabel;
-      contentDiv.appendChild(ctaEl);
+      const cta = document.createElement('a');
+      cta.classList.add('feature-card-cta');
+      cta.href = card.cardCta;
+      cta.textContent = card.cardCtaLabel;
+      content.appendChild(cta);
     }
 
-    // Append content
-    cardDiv.appendChild(contentDiv);
-    cardsContainer.appendChild(cardDiv);
+    cardEl.appendChild(content);
+    container.appendChild(cardEl);
   });
 
-  // Empty the block and add the cards
-  block.textContent = '';
-  block.appendChild(cardsContainer);
+  // 5️⃣ Replace existing block content
+  block.innerHTML = '';
+  block.appendChild(container);
 }
