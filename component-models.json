@@ -283,6 +283,7 @@
         "name": "container",
         "valueType": "string",
         "collapsible": true,
+        "multi": true,
         "fields": [
           {
             "component": "text-input",
