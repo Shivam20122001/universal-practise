@@ -279,10 +279,9 @@
     "fields": [
       {
         "component": "container",
-        "label": "Container",
+        "label": "Simple Container",
         "name": "container",
         "valueType": "string",
-        "collapsible": true,
         "fields": [
           {
             "component": "text-input",
