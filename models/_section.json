@@ -51,7 +51,8 @@
         "cards",
         "columns",
         "fragment",
-        "feature-cards"
+        "feature-cards",
+        "simple-container"
       ]
     }
   ]

@@ -190,6 +190,25 @@
               }
             }
           }
+        },
+        {
+          "title": "Simple Container",
+          "id": "simple-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Simple Container",
+                  "model": "simple-container",
+                  "data": {
+                    "name": "Simple Container",
+                    "model": "simple-container"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     }
