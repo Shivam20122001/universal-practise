@@ -275,6 +275,23 @@
     ]
   },
   {
+    "id": "ingredient",
+    "fields": [
+      {
+        "component": "text",
+        "name": "ingredientName",
+        "label": "Ingredient Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "quantity",
+        "label": "Quantity",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "recipe-card",
     "fields": [
       {

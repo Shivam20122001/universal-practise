@@ -25,7 +25,23 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Recipe Card",
-              "model": "recipe-card"
+              "model": "recipe-card",
+              "filter": "recipe-card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Ingredient",
+      "id": "ingredient",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Ingredient",
+              "model": "ingredient"
             }
           }
         }
@@ -33,6 +49,23 @@
     }
   ],
   "models": [
+    {
+      "id": "ingredient",
+      "fields": [
+        {
+          "component": "text",
+          "name": "ingredientName",
+          "label": "Ingredient Name",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "quantity",
+          "label": "Quantity",
+          "valueType": "string"
+        }
+      ]
+    },
     {
       "id": "recipe-card",
       "fields": [
@@ -77,6 +110,12 @@
       "id": "recipe-cards",
       "components": [
         "recipe-card"
+      ]
+    },
+    {
+      "id": "recipe-card",
+      "components": [
+        "ingredient"
       ]
     }
   ]

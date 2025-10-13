@@ -47,5 +47,11 @@
     "components": [
       "recipe-card"
     ]
+  },
+  {
+    "id": "recipe-card",
+    "components": [
+      "ingredient"
+    ]
   }
 ]
