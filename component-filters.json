@@ -17,7 +17,8 @@
       "columns",
       "fragment",
       "feature-cards",
-      "simple-container"
+      "simple-container",
+      "recipe-cards"
     ]
   },
   {
@@ -39,6 +40,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "recipe-cards",
+    "components": [
+      "recipe-card"
     ]
   }
 ]
