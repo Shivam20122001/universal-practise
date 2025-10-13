@@ -294,6 +294,25 @@
     ]
   },
   {
+    "id": "recipe-cards",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Recipe Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Recipe Description",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "simple-container",
     "fields": [
       {
