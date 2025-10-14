@@ -296,36 +296,13 @@
     "fields": [
       {
         "component": "reference",
-        "valueType": "string",
         "name": "image",
-        "label": "Recipe Image",
-        "multi": false
+        "label": "Recipe Image"
       },
       {
         "component": "richtext",
         "name": "text",
-        "value": "",
-        "label": "Recipe Description",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "recipe-cards",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Recipe Image",
-        "multi": false
-      },
-      {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Recipe Description",
-        "valueType": "string"
+        "label": "Recipe Description"
       }
     ]
   },
