@@ -275,34 +275,40 @@
     ]
   },
   {
-    "id": "ingredient",
+    "id": "recipe-card",
     "fields": [
       {
-        "component": "text",
-        "name": "ingredientName",
-        "label": "Ingredient Name",
-        "valueType": "string"
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Recipe Image",
+        "multi": false
       },
       {
-        "component": "text",
-        "name": "quantity",
-        "label": "Quantity",
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Recipe Description",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "recipe-card",
+    "id": "recipe-cards",
     "fields": [
       {
         "component": "reference",
+        "valueType": "string",
         "name": "image",
-        "label": "Recipe Image"
+        "label": "Recipe Image",
+        "multi": false
       },
       {
         "component": "richtext",
         "name": "text",
-        "label": "Recipe Description"
+        "value": "",
+        "label": "Recipe Description",
+        "valueType": "string"
       }
     ]
   },
