@@ -31,6 +31,20 @@
           }
         }
       }
+    },{
+        "title": "Nested Recipe Card",
+      "id": "nested-recipe-card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Nested Recipe Card",
+              "model": "nested-recipe-card"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -71,6 +85,19 @@
           "valueType": "string"
         }
       ]
+    },
+        {
+      "id": "nested-recipe-card",
+      "fields": [
+        {
+          "component": "text",
+          "name": "text",
+          "value": "",
+          "label": "Nested Description",
+          "valueType": "string"
+        }
+      ]
+
     }
   ],
   "filters": [
@@ -79,6 +106,11 @@
       "components": [
         "recipe-card"
       ]
+    },{
+        "id": "recipe-cards",
+        "components": [
+            "nested-recipe-card"
+        ]
     }
   ]
 }

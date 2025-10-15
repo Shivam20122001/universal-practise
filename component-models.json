@@ -313,6 +313,18 @@
     ]
   },
   {
+    "id": "nested-recipe-card",
+    "fields": [
+      {
+        "component": "text",
+        "name": "text",
+        "value": "",
+        "label": "Nested Description",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "simple-container",
     "fields": [
       {

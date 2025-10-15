@@ -47,5 +47,11 @@
     "components": [
       "recipe-card"
     ]
+  },
+  {
+    "id": "recipe-cards",
+    "components": [
+      "nested-recipe-card"
+    ]
   }
 ]
