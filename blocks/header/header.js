@@ -1,166 +1,273 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+export default function decorate(b) {
+  b.classList.add('header-position-relative', 'header-mb-15');
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
-
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
+  const appName = b.querySelector('.header-app-name');
+  if (appName) {
+    appName.classList.add('header-d-none', 'header-app-name');
+    if (appName.dataset && appName.dataset.appName) {
+      b.dataset.appName = appName.dataset.appName;
     }
   }
-}
 
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
+  const header = b.querySelector('.header-boing-container');
+  if (header) {
+    header.classList.add(
+      'header-boing-container',
+      'header-d-flex',
+      'header-justify-content-between',
+      'header-align-items-center',
+      'header-h-15',
+      'header-px-5',
+      'header-py-2',
+      'header-fixed-top',
+      'header-w-100',
+      'header-bg-white'
+    );
+    const logoDiv = header.querySelector('.header-d-flex.header-w-25');
+    if (logoDiv) {
+      logoDiv.classList.add('header-d-flex', 'header-w-25');
     }
-  }
-}
-
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-  }
-}
-
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
-}
-
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
-function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
-  });
-}
-
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
- */
-function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.nav-hamburger button');
-  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
-  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
-    navDrops.forEach((drop) => {
-      if (!drop.hasAttribute('tabindex')) {
-        drop.setAttribute('tabindex', 0);
-        drop.addEventListener('focus', focusNavSection);
+    const logoLinkWrap = header.querySelector('a[a-label="header-logo-boing"]');
+    if (logoLinkWrap) {
+      logoLinkWrap.classList.add('header-analytics_cta_click');
+      const logoImg = logoLinkWrap.querySelector('.header__logo-img');
+      if (logoImg) {
+        logoImg.classList.add('header__logo-img');
       }
-    });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
+    }
+    const loginWrap = header.querySelector('.header__login-btn-wrapper');
+    if (loginWrap) {
+      loginWrap.classList.add('header__login-btn-wrapper', 'header-analytics_cta_click');
+      const loginBtn = loginWrap.querySelector('.header__login-btn');
+      if (loginBtn) {
+        loginBtn.classList.add(
+          'header__login-btn',
+          'header-btn',
+          'header-text-boing-primary',
+          'header-bg-transparent',
+          'header-fw-semibold',
+          'header-rounded-4',
+          'header-btn-sm',
+          'header-py-3',
+          'header-px-4'
+        );
+      }
+    }
   }
 
-  // enable menu collapse on escape keypress
-  if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
-  } else {
-    window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
-  }
-}
-
-/**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
-export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
-
-  // decorate nav DOM
-  block.textContent = '';
-  const nav = document.createElement('nav');
-  nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
-
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
-  });
-
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
-
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  const submenu = b.querySelector('.header-submenu-container');
+  if (submenu) {
+    submenu.classList.add(
+      'header-submenu-container',
+      'header-position-fixed',
+      'header-top-0',
+      'header-start-0',
+      'header-end-0',
+      'header-m-auto',
+      'header-overflow-hidden'
+    );
+    const sidebar = submenu.querySelector('.header-sidebar');
+    if (sidebar) {
+      sidebar.classList.add('header-sidebar', 'header-start-0', 'header-bg-white', 'header-position-absolute');
+      const menu = sidebar.querySelector('.header-sidebar__menu');
+      if (menu) {
+        menu.classList.add('header-sidebar__menu', 'header-list-unstyled', 'header-px-4');
+        menu.querySelectorAll('.header-sidebar__menu-item').forEach(li => {
+          li.classList.add('header-sidebar__menu-item', 'header-py-6', 'header-border-bottom', 'header-border-boing-neutral-gray-200');
+          const link = li.querySelector('.header-sidebar__menu-link');
+          if (link) {
+            link.classList.add(
+              'header-sidebar__menu-link',
+              'header-d-flex',
+              'header-align-items-center',
+              'header-text-decoration-none',
+              'header-px-6',
+              'header-fw-medium',
+              'header-analytics_cta_click'
+            );
+            const icon = link.querySelector('.header-sidebar__menu-icon');
+            if (icon) {
+              icon.classList.add('header-sidebar__menu-icon', 'header-me-4');
+            }
+          }
+        });
+      }
+      const curve = sidebar.querySelector('.header-sidebar__curve');
+      if (curve) {
+        curve.classList.add('header-sidebar__curve');
+      }
+    }
+    const overlay = submenu.querySelector('.header-overlay');
+    if (overlay) {
+      overlay.classList.add(
+        'header-overlay',
+        'header-position-absolute',
+        'header-top-0',
+        'header-start-0',
+        'header-w-100',
+        'header-h-100',
+        'header-bg-black',
+        'header-opacity-25'
+      );
+    }
+    const footerBrand = submenu.querySelector('.header-footer-brand');
+    if (footerBrand) {
+      footerBrand.classList.add('header-footer-brand', 'header-w-100', 'header-bg-boing-neutral-gray-600');
+      const primary = footerBrand.querySelector('.header-footer-brand__primary');
+      if (primary) {
+        primary.classList.add('header-footer-brand__primary');
+        const primaryContent = primary.querySelector('.header-footer-brand__primary--content');
+        if (primaryContent) {
+          primaryContent.classList.add(
+            'header-footer-brand__primary--content',
+            'header-d-flex',
+            'header-flex-column',
+            'header-flex-md-row',
+            'header-justify-content-md-between',
+            'header-align-items-center'
+          );
         }
-      });
-    });
+        const left = primary.querySelector('.header-footer-brand__left');
+        if (left) {
+          left.classList.add(
+            'header-footer-brand__left',
+            'header-d-flex',
+            'header-gap-16',
+            'header-px-10',
+            'header-align-items-center',
+            'header-justify-content-center'
+          );
+        }
+        const right = primary.querySelector('.header-footer-brand__right');
+        if (right) {
+          right.classList.add('header-footer-brand__right');
+        }
+        const navbar = primary.querySelector('.header-footer-brand__navbar');
+        if (navbar) {
+          navbar.classList.add('header-footer-brand__navbar', 'header-d-grid', 'header-d-md-flex');
+          const navbarLeft = navbar.querySelector('.header-footer-brand__navbar--left');
+          if (navbarLeft) {
+            navbarLeft.classList.add('header-footer-brand__navbar--left', 'header-d-flex', 'header-flex-column', 'header-flex-md-row');
+            navbarLeft.querySelectorAll('.header-footerList').forEach(footerList => {
+              footerList.querySelectorAll('.header-footer-list__item').forEach(item => {
+                item.classList.add('header-footer-list__item');
+                const link = item.querySelector('.header-footer-list__item--link');
+                if (link) {
+                  link.classList.add(
+                    'header-cta-analytics',
+                    'header-analytics_cta_click',
+                    'header-footer-list__item--link',
+                    'header-d-inline-block'
+                  );
+                }
+              });
+            });
+          }
+          const navbarRight = navbar.querySelector('.header-footer-brand__navbar--right');
+          if (navbarRight) {
+            navbarRight.classList.add('header-footer-brand__navbar--right', 'header-d-flex', 'header-flex-column', 'header-flex-md-row');
+            navbarRight.querySelectorAll('.header-footerList').forEach(footerList => {
+              footerList.querySelectorAll('.header-footer-list__item').forEach(item => {
+                item.classList.add('header-footer-list__item');
+                const link = item.querySelector('.header-footer-list__item--link');
+                if (link) {
+                  link.classList.add(
+                    'header-cta-analytics',
+                    'header-analytics_cta_click',
+                    'header-footer-list__item--link',
+                    'header-d-inline-block'
+                  );
+                }
+              });
+            });
+          }
+        }
+      }
+      const secondary = footerBrand.querySelector('.header-footer-brand__secondary');
+      if (secondary) {
+        secondary.classList.add('header-footer-brand__secondary');
+        const secondaryContent = secondary.querySelector('.header-footer-brand__secondary--content');
+        if (secondaryContent) {
+          secondaryContent.classList.add(
+            'header-footer-brand__secondary--content',
+            'header-d-flex',
+            'header-flex-column',
+            'header-justify-content-md-between',
+            'header-align-items-center'
+          );
+        }
+        const right = secondary.querySelector('.header-footer-brand__right');
+        if (right) {
+          right.classList.add('header-footer-brand__right', 'header-d-flex', 'header-flex-column', 'header-pb-5');
+          const socialTitle = right.querySelector('.header-social_media--title');
+          if (socialTitle) {
+            socialTitle.classList.add('header-social_media--title');
+          }
+          const socialList = right.querySelector('.header-footer-brand__right--list');
+          if (socialList) {
+            socialList.classList.add(
+              'header-footer-brand__right--list',
+              'header-d-flex',
+              'header-align-items-center',
+              'header-justify-content-center',
+              'header-px-10',
+              'header-flex-wrap'
+            );
+            socialList.querySelectorAll('.header-footer-brand__right--item').forEach(item => {
+              item.classList.add('header-footer-brand__right--item', 'header-d-flex', 'header-justify-content-center', 'header-align-items-center');
+              const link = item.querySelector('.header-footer-brand__right--link');
+              if (link) {
+                link.classList.add(
+                  'header-footer-brand__right--link',
+                  'header-d-flex',
+                  'header-justify-content-center',
+                  'header-align-items-center',
+                  'header-analytics_cta_click'
+                );
+                const icon = link.querySelector('img');
+                if (icon) {
+                  icon.classList.add('header-object-fit-contain', 'header-w-100', 'header-h-100');
+                }
+              }
+            });
+          }
+        }
+        const left = secondary.querySelector('.header-footer-brand__left');
+        if (left) {
+          left.classList.add(
+            'header-footer-brand__left',
+            'header-py-5',
+            'header-d-flex',
+            'header-flex-column',
+            'header-gap-3'
+          );
+          const leftList = left.querySelector('.header-footer-brand__left--list');
+          if (leftList) {
+            leftList.classList.add(
+              'header-footer-brand__left--list',
+              'header-d-flex',
+              'header-align-items-center',
+              'header-justify-content-center',
+              'header-flex-wrap'
+            );
+            leftList.querySelectorAll('.header-footer-brand__left--item').forEach(item => {
+              item.classList.add('header-footer-brand__left--item', 'header-foot_link');
+              const link = item.querySelector('.header-footer-brand__left--link');
+              if (link) {
+                link.classList.add('header-footer-brand__left--link', 'header-analytics_cta_click');
+              }
+            });
+          }
+          const copyright = left.querySelector('.header-footer-brand__left--copyright');
+          if (copyright) {
+            copyright.classList.add('header-footer-brand__left--copyright', 'header-text-center');
+            const copyrightText = copyright.querySelector('.header-footer-brand__left--text');
+            if (copyrightText) {
+              copyrightText.classList.add('header-footer-brand__left--text', 'header-text-white');
+            }
+          }
+        }
+      }
+    }
   }
-
-  // hamburger for mobile
-  const hamburger = document.createElement('div');
-  hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
-    </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
-  nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
-
-  const navWrapper = document.createElement('div');
-  navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav);
-  block.append(navWrapper);
 }

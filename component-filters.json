@@ -18,13 +18,20 @@
       "fragment",
       "feature-cards",
       "simple-container",
-      "recipe-cards"
+      "recipe-cards",
+      "spaceadder"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-items",
+    "components": [
+      "carousel-item"
     ]
   },
   {
@@ -43,9 +50,47 @@
     ]
   },
   {
+    "id": "featurecards",
+    "components": [
+      "featurecard"
+    ]
+  },
+  {
+    "id": "footer_nav_links",
+    "components": [
+      "footer-nav-link"
+    ]
+  },
+  {
+    "id": "footer_social_links",
+    "components": [
+      "footer-social-link"
+    ]
+  },
+  {
+    "id": "header",
+    "components": [
+      "headerMenuItem",
+      "footerLink",
+      "socialLink"
+    ]
+  },
+  {
+    "id": "latestblogs_cards",
+    "components": [
+      "latestblogcard"
+    ]
+  },
+  {
     "id": "recipe-cards",
     "components": [
       "recipe-card"
+    ]
+  },
+  {
+    "id": "sticky-navigation",
+    "components": [
+      "sticky-navigation-item"
     ]
   }
 ]
