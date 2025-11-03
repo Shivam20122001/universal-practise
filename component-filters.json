@@ -33,7 +33,7 @@
     ]
   },
   {
-    "id": "carousel-items",
+    "id": "carousel",
     "components": [
       "carousel-item"
     ]
