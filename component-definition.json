@@ -145,7 +145,6 @@
         {
           "title": "Carousel Item",
           "id": "carousel-item",
-          "icon": "",
           "plugins": {
             "xwalk": {
               "page": {
@@ -287,31 +286,29 @@
         {
           "title": "Header",
           "id": "header",
-          "icon": "header-icon",
-          "category": "navigation",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
+                  "filter": "header",
                   "model": "header",
-                  "name": "Header"
+                  "name": "header"
                 }
               }
             }
           }
         },
         {
-          "title": "Header Menu Item",
-          "id": "headerMenuItem",
-          "icon": "",
+          "title": "Menu Item",
+          "id": "menu-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "headerMenuItem",
-                  "name": "headerMenuItem"
+                  "model": "menu-item",
+                  "name": "menu-item"
                 }
               }
             }
@@ -319,15 +316,14 @@
         },
         {
           "title": "Footer Link",
-          "id": "footerLink",
-          "icon": "",
+          "id": "footer-link",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "footerLink",
-                  "name": "footerLink"
+                  "model": "footer-link",
+                  "name": "footer-link"
                 }
               }
             }
@@ -335,15 +331,14 @@
         },
         {
           "title": "Social Link",
-          "id": "socialLink",
-          "icon": "",
+          "id": "social-link",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "socialLink",
-                  "name": "socialLink"
+                  "model": "social-link",
+                  "name": "social-link"
                 }
               }
             }

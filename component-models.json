@@ -416,137 +416,112 @@
     "fields": [
       {
         "component": "text",
-        "label": "App Name",
-        "name": "appName",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Logo Image",
-        "name": "logoImage",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Logo Link",
-        "name": "logoLink",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Login Link",
-        "name": "loginLink",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "Login Button Text",
-        "name": "loginText",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "itemType": "headerMenuItem",
-        "label": "Header Menu Items",
-        "multi": true,
-        "name": "menuItems"
-      },
-      {
-        "component": "reference",
-        "label": "Footer Logo 1",
-        "name": "footerLogo1",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Footer Logo 2",
-        "name": "footerLogo2",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "itemType": "footerLink",
-        "label": "Footer Links",
-        "multi": true,
-        "name": "footerLinks"
-      },
-      {
-        "component": "container",
-        "itemType": "socialLink",
-        "label": "Social Links",
-        "multi": true,
-        "name": "socialLinks"
-      },
-      {
-        "component": "text",
-        "label": "Copyright",
-        "name": "copyright",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "headerMenuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Menu Icon",
-        "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Menu Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Menu Label",
-        "name": "label",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Footer Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Footer Label",
-        "name": "label",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "socialLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Social Media Link",
+        "label": "Link",
         "name": "link",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Social Media Icon",
+        "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Platform Name",
-        "name": "platform",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Data Link",
+        "name": "data-link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footer-link",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Data Link Region",
+        "name": "data-link-region",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Open in new tab",
+        "name": "open-in-new-tab",
+        "valueType": "boolean"
+      }
+    ]
+  },
+  {
+    "id": "social-link",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Icon",
+        "multi": false,
+        "name": "icon",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Aria Label",
+        "name": "aria-label",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Data CTA Region",
+        "name": "data-cta-region",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Data CTA Label",
+        "name": "data-cta-label",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Open in new tab",
+        "name": "open-in-new-tab",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "label": "Data Platform Name",
+        "name": "data-platform-name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Data Social Link Type",
+        "name": "data-social-linktype",
         "valueType": "string"
       }
     ]
