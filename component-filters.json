@@ -36,7 +36,7 @@
   {
     "id": "carousel",
     "components": [
-      "carousel-item"
+      "carouselSlide"
     ]
   },
   {
@@ -61,23 +61,18 @@
     ]
   },
   {
-    "id": "footer_nav_links",
+    "id": "footerBrand",
     "components": [
-      "footer-nav-link"
-    ]
-  },
-  {
-    "id": "footer_social_links",
-    "components": [
-      "footer-social-link"
+      "footerNavColumn",
+      "footerSocialLink"
     ]
   },
   {
     "id": "header",
     "components": [
-      "menu-item",
-      "footer-link",
-      "social-link"
+      "menuItem",
+      "footerLink",
+      "socialLink"
     ]
   },
   {
@@ -93,9 +88,15 @@
     ]
   },
   {
-    "id": "sticky-navigation",
+    "id": "spaceadderContainer"
+  },
+  {
+    "id": "spaceadder"
+  },
+  {
+    "id": "stickyNavigationBottomNav",
     "components": [
-      "sticky-navigation-item"
+      "navItem"
     ]
   }
 ]
