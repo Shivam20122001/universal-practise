@@ -161,12 +161,7 @@
         "id": "headerNavigation",
         "components": [
           "navMenu",
-          "languageOption"
-        ]
-      },
-      {
-        "id": "navMenu",
-        "components": [
+          "languageOption",
           "subMenuItem"
         ]
       }
