@@ -93,6 +93,14 @@
             "items": {
               "type": "languageOption"
             }
+          },
+          {
+            "component": "container",
+            "name": "subMenuItems",
+            "label": "Sub Menu Items",
+            "items": {
+              "type": "subMenuItem"
+            }
           }
         ]
       },
@@ -110,14 +118,6 @@
             "name": "menuLink",
             "label": "Menu Link",
             "valueType": "string"
-          },
-          {
-            "component": "container",
-            "name": "subMenuItems",
-            "label": "Sub Menu Items",
-            "items": {
-              "type": "subMenuItem"
-            }
           }
         ]
       },
