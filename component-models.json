@@ -369,6 +369,98 @@
     ]
   },
   {
+    "id": "headerNavigation",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "logoLink",
+        "label": "Logo Link",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "contactUsLink",
+        "label": "Contact Us Link",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "name": "navMenus",
+        "label": "Navigation Menus",
+        "items": {
+          "type": "navMenu"
+        }
+      },
+      {
+        "component": "container",
+        "name": "languageOptions",
+        "label": "Language Options",
+        "items": {
+          "type": "languageOption"
+        }
+      }
+    ]
+  },
+  {
+    "id": "navMenu",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Menu Title",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "menuLink",
+        "label": "Menu Link",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "name": "subMenuItems",
+        "label": "Sub Menu Items",
+        "items": {
+          "type": "subMenuItem"
+        }
+      }
+    ]
+  },
+  {
+    "id": "subMenuItem",
+    "fields": [
+      {
+        "component": "text",
+        "name": "label",
+        "label": "Sub Menu Label",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "link",
+        "label": "Sub Menu Link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "languageOption",
+    "fields": [
+      {
+        "component": "text",
+        "name": "label",
+        "label": "Language Label",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "langLink",
+        "label": "Language Link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {

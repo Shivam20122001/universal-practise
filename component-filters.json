@@ -68,6 +68,19 @@
     ]
   },
   {
+    "id": "headerNavigation",
+    "components": [
+      "navMenu",
+      "languageOption"
+    ]
+  },
+  {
+    "id": "navMenu",
+    "components": [
+      "subMenuItem"
+    ]
+  },
+  {
     "id": "latestblogs_cards",
     "components": [
       "latestblogcard"
