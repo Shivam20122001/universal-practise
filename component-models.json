@@ -372,13 +372,13 @@
     "id": "headerNavigation",
     "fields": [
       {
-        "component": "reference",
+        "component": "aem-content",
         "name": "logoLink",
         "label": "Logo Link",
         "valueType": "string"
       },
       {
-        "component": "reference",
+        "component": "aem-content",
         "name": "contactUsLink",
         "label": "Contact Us Link",
         "valueType": "string"
