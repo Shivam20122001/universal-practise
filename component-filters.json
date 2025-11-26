@@ -68,14 +68,6 @@
     ]
   },
   {
-    "id": "header",
-    "components": [
-      "menuItem",
-      "footerLink",
-      "socialLink"
-    ]
-  },
-  {
     "id": "latestblogs_cards",
     "components": [
       "latestblogcard"
