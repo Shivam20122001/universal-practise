@@ -106,7 +106,7 @@
             "valueType": "string"
           },
           {
-            "component": "reference",
+            "component": "aem-content",
             "name": "menuLink",
             "label": "Menu Link",
             "valueType": "string"
@@ -131,7 +131,7 @@
             "valueType": "string"
           },
           {
-            "component": "reference",
+            "component": "aem-content",
             "name": "link",
             "label": "Sub Menu Link",
             "valueType": "string"
@@ -148,7 +148,7 @@
             "valueType": "string"
           },
           {
-            "component": "reference",
+            "component": "aem-content",
             "name": "langLink",
             "label": "Language Link",
             "valueType": "string"
